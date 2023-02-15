@@ -3,21 +3,19 @@ const search = document.querySelector('.search');
 const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
 const error404 = document.querySelector('.not-found');
-const ldsRoller = document.querySelector('.lds-roller');
-let islog = false;
+
 
 search.addEventListener('click', () => {
 
     const APIKey = 'ac3209b3c5371b7d6f4b1761f9655f6b';
     const city = document.querySelector('.search-box input').value;
-    islog = true;
-    ldsRoller.style.display = 'block'
+
     if (city === '') {
         return;
     }
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`).then(response => response.json()).then(json => {
         console.log(json);
-        ldsRoller.style.display = 'none'
+
         if (json.cod == '404') {
             container.style.height = '605px';
             weatherBox.style.display = 'none';
@@ -77,4 +75,10 @@ search.addEventListener('click', () => {
         container.style.height = '590px';
 
     })
+})
+const body = document.querySelector("body"),
+    modeToogleSwitch = body.querySelector(".toogle-switch")
+
+modeToogleSwitch.addEventListener("click", () => {
+    body.classList.toggle("dark");
 })
